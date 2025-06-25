@@ -1,44 +1,34 @@
 name: Dependency Check
 
-on:
-  push:
-    branches: [main]
-  pull_request:
+on: [push, pull_request]
 
 jobs:
-  dependency-check:
-    name: Run OWASP Dependency Check
+  depchecktest:
     runs-on: ubuntu-latest
+    name: dependency-check
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
+      - name: Install dependencies (npm)
+        run: npm install
+
+      - name: Run Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
         with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Install OWASP Dependency-Check
-        run: |
-          VERSION="8.4.2"
-          curl -L "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -o dependency-check.zip
-          unzip dependency-check.zip -d dc-unpacked
-          chmod +x dc-unpacked/dependency-check/bin/dependency-check.sh
-
-      - name: Run Dependency-Check (root directory)
-        run: |
-          mkdir -p dependency-check-report
-          ./dc-unpacked/dependency-check/bin/dependency-check.sh \
-            --project "dvna-sast-validate" \
-            --scan ./ \
-            --format JSON \
-            --out dependency-check-report \
+          project: 'dvna-sast-validate'
+          path: '.' # raiz do projeto
+          format: 'HTML,JSON'
+          out: 'reports'
+          args: >
+            --failOnCVSS 7
+            --enableRetired
             --disableAssembly
 
-      - name: Upload HTML Report
+      - name: Upload Dependency-Check Reports
         uses: actions/upload-artifact@v4
         with:
-          name: dependency-check-json-report
-          path: dependency-check-report/dependency-check-report.json
+          name: dependency-check-reports
+          path: reports/
