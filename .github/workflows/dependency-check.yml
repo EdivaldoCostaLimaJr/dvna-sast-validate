@@ -33,7 +33,7 @@ jobs:
           ./dc-unpacked/dependency-check/bin/dependency-check.sh \
             --project "dvna-sast-validate" \
             --scan ./ \
-            --format HTML \
+            --format JSON \
             --out dependency-check-report \
             --disableAssembly
 
