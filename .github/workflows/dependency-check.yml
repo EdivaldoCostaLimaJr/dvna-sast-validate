@@ -11,6 +11,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
       - name: Install dependencies (npm)
         run: npm install
 
@@ -19,7 +24,7 @@ jobs:
         id: Depcheck
         with:
           project: 'dvna-sast-validate'
-          path: '.' # raiz do projeto
+          path: '.' # Diretório raiz do projeto
           format: 'HTML,JSON'
           out: 'reports'
           args: >
