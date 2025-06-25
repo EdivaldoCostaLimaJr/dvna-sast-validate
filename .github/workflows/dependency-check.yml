@@ -1,16 +1,16 @@
-name: Node.js Dependency Check
+name: Dependency Check
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  depchecktest:
+  dependency-check:
     runs-on: ubuntu-latest
-    name: dependency_check_nodejs
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Use Node.js v14
+      - name: Use Node.js 14
         uses: actions/setup-node@v3
         with:
           node-version: 14
@@ -18,20 +18,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Dependency-Check
+      - name: Run OWASP Dependency Check
         uses: dependency-check/Dependency-Check_Action@main
-        id: Depcheck
         with:
-          project: 'nodejs-app'
-          path: '.'                         # Path to scan (e.g., where package.json is)
-          format: 'HTML'                    # Report format
-          out: 'reports'                    # Output folder
+          project: 'dvna-sast-validate'
+          path: '.'
+          format: 'HTML'
+          out: 'dependency-check-report'
           args: >
-            --failOnCVSS 7                  # Optional: fail the job if vulnerabilities ≥ CVSS 7
-            --enableRetired                 # Optional: detect deprecated packages
+            --failOnCVSS 7
+            --enableRetired
 
-      - name: Upload Dependency-Check Report
+      - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
-          name: Depcheck Report
-          path: reports
+          name: dependency-check-report
+          path: dependency-check-report/dependency-check-report.html
