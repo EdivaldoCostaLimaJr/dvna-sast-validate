@@ -1,38 +1,42 @@
-name: Dependency Check
+name: Dependency Check CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   depcheck:
     runs-on: ubuntu-latest
-    name: Run OWASP Dependency Check
+    name: Run Dependency Check with Node 14 and bcrypt
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Use Node.js v14
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '14'
 
-      - name: Install Node.js dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Run OWASP Dependency-Check
         uses: dependency-check/Dependency-Check_Action@main
+        id: depcheck
         with:
           project: 'dvna-sast-validate'
           path: '.'
-          format: 'HTML,JSON'
-          out: 'reports'
+          format: 'HTML'
+          out: 'dependency-check-report'
           args: >
             --failOnCVSS 7
             --enableRetired
-            --disableAssembly
 
-      - name: Upload Dependency Check Reports
+      - name: Upload Dependency-Check Report
         uses: actions/upload-artifact@v4
         with:
-          name: dependency-check-reports
-          path: reports/
+          name: dependency-check-report
+          path: dependency-check-report/dependency-check-report.html
