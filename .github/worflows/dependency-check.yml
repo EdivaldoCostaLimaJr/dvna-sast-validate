@@ -1,0 +1,44 @@
+name: Dependency Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  dependency-check:
+    name: Run OWASP Dependency Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install OWASP Dependency-Check
+        run: |
+          VERSION="8.4.2"
+          curl -L "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -o dependency-check.zip
+          unzip dependency-check.zip -d dc-unpacked
+          chmod +x dc-unpacked/dependency-check/bin/dependency-check.sh
+
+      - name: Run Dependency-Check on dvna-sast-validate
+        run: |
+          mkdir -p dependency-check-report
+          ./dc-unpacked/dependency-check/bin/dependency-check.sh \
+            --project "dvna-sast-validate" \
+            --scan ./dvna-sast-validate \
+            --format HTML \
+            --out dependency-check-report \
+            --disableAssembly
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-html-report
+          path: dependency-check-report/dependency-check-report.html
