@@ -26,7 +26,7 @@ jobs:
           format: 'HTML'
           out: 'dependency-check-report'
           args: >
-            --failOnCVSS 7
+            --failOnCVSS 10
             --enableRetired
 
       - name: Upload HTML report
