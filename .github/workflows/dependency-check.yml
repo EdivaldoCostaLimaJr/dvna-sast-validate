@@ -27,12 +27,12 @@ jobs:
           unzip dependency-check.zip -d dc-unpacked
           chmod +x dc-unpacked/dependency-check/bin/dependency-check.sh
 
-      - name: Run Dependency-Check on dvna-sast-validate
+      - name: Run Dependency-Check (root directory)
         run: |
           mkdir -p dependency-check-report
           ./dc-unpacked/dependency-check/bin/dependency-check.sh \
             --project "dvna-sast-validate" \
-            --scan ./dvna-sast-validate \
+            --scan ./ \
             --format HTML \
             --out dependency-check-report \
             --disableAssembly
