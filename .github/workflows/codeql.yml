@@ -1,4 +1,4 @@
-name: "CodeQL Analysis"
+name: CodeQL
 
 on:
   push:
@@ -35,6 +35,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 14
+
       - run: npm install
 
       - name: Build project
@@ -46,5 +47,6 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
 
-      - name: 🔗 Link para os resultados no Code Scanning
-        run: echo "🔍 Veja os resultados em: https://github.com/${{ github.repository }}/security/code-scanning"
+      - name: 🔍 Link para os resultados no Code Scanning
+        run: |
+          echo "🔗 Veja os resultados em: https://github.com/${{ github.repository }}/security/code-scanning"
