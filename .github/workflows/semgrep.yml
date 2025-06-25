@@ -1,0 +1,35 @@
+name: Semgrep Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  semgrep:
+    name: Run Semgrep Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Semgrep
+        run: |
+          python -m pip install --upgrade pip
+          pip install semgrep
+
+      - name: Run Semgrep scan
+        run: |
+          semgrep --config p/owasp-top-ten --json > semgrep-report.json || true   
+
+      - name: Upload Semgrep report
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-report
+          path: semgrep-report.json
