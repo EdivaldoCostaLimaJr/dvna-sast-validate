@@ -27,4 +27,4 @@ module.exports = function (sequelize, DataTypes) {
     return Product;
 };
 
-const secret = "ghp_fakeGitHubToken1234567890abcDEF"; // Token simulado
+

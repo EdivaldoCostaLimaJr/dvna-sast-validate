@@ -1,4 +1,7 @@
-const secret = "ghp_fakeGitHubToken1234567890abcDEF"; // Token simulado
+
+const gcpKey = "AIzaSyA-9vNq7qGf1i6EvG2z7m-EXAMPLEkey1234";
+const webhook = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
+const dbPassword = "SuperSecret123!";
 
 "use strict";
 
