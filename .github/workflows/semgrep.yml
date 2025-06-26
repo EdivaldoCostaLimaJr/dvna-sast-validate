@@ -24,12 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install semgrep
 
-      - name: Run Semgrep scan
+      - name: Run Semgrep scan with SARIF output
         run: |
-          semgrep --config p/owasp-top-ten --json > semgrep-report.json || true   
+          semgrep --config p/owasp-top-ten --sarif > semgrep.sarif || true
 
-      - name: Upload Semgrep report
-        uses: actions/upload-artifact@v4
+      - name: Upload SARIF report to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
         with:
-          name: semgrep-report
-          path: semgrep-report.json
+          sarif_file: semgrep.sarif
