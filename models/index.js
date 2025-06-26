@@ -1,7 +1,7 @@
 
-const gcpKey = "AIzaSyA-9vNq7qGf1i6EvG2z7m-EXAMPLEkey1234";
+const gcpKey = "AIzaSyD4u4cz7REp1sLTZ1HlWnTXHbL4yzN1EJ8";
 const webhook = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
-const dbPassword = "SuperSecret123!";
+const dbPassword = "Jzcg4~^72=£=";
 
 "use strict";
 
