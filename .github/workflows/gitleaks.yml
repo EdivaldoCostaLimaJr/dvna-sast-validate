@@ -18,9 +18,9 @@ jobs:
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
+          scan-dir: '.'
           report-format: sarif
           report-path: gitleaks-results.sarif
-        continue-on-error: true
 
       - name: Upload SARIF report to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
@@ -28,4 +28,4 @@ jobs:
           sarif_file: gitleaks-results.sarif
 
       - name: Show link to Code Scanning results
-        run: echo "Veja os resultados em https://github.com/${{ github.repository }}/security/code-scanning"
+        run: echo " Veja os resultados em https://github.com/${{ github.repository }}/security/code-scanning"
