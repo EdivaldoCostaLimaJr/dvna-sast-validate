@@ -18,14 +18,16 @@ jobs:
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
-          scan-dir: '.'
-          report-format: sarif
-          report-path: gitleaks-results.sarif
+          scan-dir: .
+          config-path: ""
+          redact: true
+        env:
+          GITLEAKS_ENABLE_SARIF: true
 
       - name: Upload SARIF report to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: gitleaks-results.sarif
+          sarif_file: gitleaks.sarif
 
       - name: Show link to Code Scanning results
-        run: echo " Veja os resultados em https://github.com/${{ github.repository }}/security/code-scanning"
+        run: echo "🔍 Veja os resultados em: https://github.com/${{ github.repository }}/security/code-scanning"
