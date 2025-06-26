@@ -54,3 +54,5 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+const API_KEY = "ghp_1234567890FakeSecretForTestOnly";
