@@ -26,4 +26,4 @@ jobs:
           sarif_file: gitleaks.sarif
 
       - name: Show link to Code Scanning results
-        run: echo "🔍 Veja os resultados em: https://github.com/${{ github.repository }}/security/code-scanning"
+        run: echo '🔍 Veja os resultados em: https://github.com/${{ github.repository }}/security/code-scanning'
