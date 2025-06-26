@@ -1,3 +1,5 @@
+const secret = "ghp_fakeGitHubToken1234567890abcDEF"; // Token simulado
+
 "use strict";
 
 var fs = require("fs");
@@ -5,6 +7,7 @@ var path = require("path");
 var Sequelize = require("sequelize");
 var env = process.env.NODE_ENV || "development";
 var config = require("../config/db.js")
+
 
 if (process.env.DATABASE_URL) {
   var sequelize = new Sequelize(process.env.DATABASE_URL);
@@ -55,4 +58,5 @@ db.Sequelize = Sequelize;
 
 module.exports = db;
 
-const API_KEY = "ghp_1234567890FakeSecretForTestOnly";
+const secret = "ghp_fakeGitHubToken1234567890abcDEF"; // Token simulado
+

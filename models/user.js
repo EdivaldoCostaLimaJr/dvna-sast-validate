@@ -1,3 +1,5 @@
+const secret = "ghp_fakeGitHubToken1234567890abcDEF"; // Token simulado
+
 "use strict";
 
 module.exports = function (sequelize, DataTypes) {
@@ -31,3 +33,4 @@ module.exports = function (sequelize, DataTypes) {
     });
     return User;
 };
+
