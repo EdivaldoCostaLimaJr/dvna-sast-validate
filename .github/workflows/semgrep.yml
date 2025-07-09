@@ -1,0 +1,55 @@
+# Nome da workflow
+name: Semgrep Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}  # Aciona em qualquer PR (sem restrição)
+  workflow_dispatch: {}  # Permite execução manual via GitHub Actions
+  schedule:
+    - cron: '20 17 * * *'  # Execução diária às 17:20 UTC. Altere para outro horário aleatório se quiser evitar picos.
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write  
+
+jobs:
+  semgrep:
+    name: Run Semgrep Static Analysis
+    runs-on: ubuntu-latest
+
+    if: ${{ github.actor != 'dependabot[bot]' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Semgrep
+        run: |
+          python -m pip install --upgrade pip
+          pip install semgrep
+
+      - name: Run Semgrep scan with SARIF output
+        run: |
+          semgrep --config p/owasp-top-ten --error --output=semgrep.sarif --sarif
+
+      - name: Verificar conteúdo do SARIF
+        run: |
+          head semgrep.sarif || echo "Arquivo SARIF vazio ou não encontrado"
+
+      - name: Upload SARIF report to GitHub Security tab
+        if: always()  
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
+
+      - name: Show link to Code Scanning results
+        run: |
+          echo "🔍 Veja os resultados em: https://github.com/${{ github.repository }}/security/code-scanning"

@@ -1,0 +1,39 @@
+name: Dockle Code Scanning
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  dockle:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t built-image:scan .
+
+      - name: Run Dockle with SARIF output
+        uses: goodwithtech/dockle-action@main
+        with:
+          image: 'built-image:scan'
+          format: 'sarif'
+          output: 'dockle-results.sarif'
+          exit-code: '1'  #pipe
+          exit-level: 'warn'
+
+      - name: Upload SARIF to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: dockle-results.sarif
+
+      - name: 🔗 Show results link
+        run: echo "🔍 https://github.com/${{ github.repository }}/security/code-scanning"
