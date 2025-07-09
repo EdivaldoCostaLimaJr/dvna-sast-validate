@@ -26,7 +26,7 @@ if(!isAdmin){
     div.style.display = "none";
 }else{
     var div = document.getElementById('non-admin-body');
-    div.style.display = "none";            
+    div.style.display = "none";
 }
 ...
 ```

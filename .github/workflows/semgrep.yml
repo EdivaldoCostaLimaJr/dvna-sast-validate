@@ -13,7 +13,7 @@ on:
 permissions:
   actions: read
   contents: read
-  security-events: write  
+  security-events: write
 
 jobs:
   semgrep:
@@ -45,7 +45,7 @@ jobs:
           head semgrep.sarif || echo "Arquivo SARIF vazio ou não encontrado"
 
       - name: Upload SARIF report to GitHub Security tab
-        if: always()  
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: semgrep.sarif

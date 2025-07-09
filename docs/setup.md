@@ -32,7 +32,7 @@ Access the application at http://127.0.0.1:9090
 
 If you do not have Docker and Docker Compose setup, then
 
-Install [Docker](https://docs.docker.com/engine/installation/) first and then 
+Install [Docker](https://docs.docker.com/engine/installation/) first and then
 [Docker Compose](https://docs.docker.com/compose/install/) on your system. Then follow the instructions below
 
 Clone the repository
@@ -85,7 +85,7 @@ Access the application at http://127.0.0.1:9090/ and start testing!
 
 This is an advanced setup which requires you to have NodeJS setup on your system and access to a MySQL Database. Unless your requirements demands it, its recommended to go with the Dockerized Setup above.
 
-If you do not have NodeJS on your system, then 
+If you do not have NodeJS on your system, then
 Install [NodeJS](https://nodejs.org/en/download/package-manager/) first.
 
 If you do not have access to an existing MySQL server and would like to setup your own MySQL instance, then refer to this [Getting Started](https://dev.mysql.com/doc/mysql-getting-started/en/) guide. Once the MySQL Sever is setup, create a new database and user for DVNA. You will need to configure these in the environment variables before starting the application.

@@ -27,7 +27,7 @@ var y = {
 **Vulnerable Code snippet**
 
 *core/appHandler.js*
-```         
+```
 ...
 module.exports.bulkProductsLegacy = function (req,res){
 	// TODO: Deprecate this soon

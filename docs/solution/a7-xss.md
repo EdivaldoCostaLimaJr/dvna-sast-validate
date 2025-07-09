@@ -18,7 +18,7 @@ http://127.0.0.1:9090/app/products
 ...
 <% if (output&&output.searchTerm) { %>
     <p class="bg-success">
-        Listing products with <strong>search query: </strong> 
+        Listing products with <strong>search query: </strong>
         <%- output.searchTerm %>
 ...
 ```
@@ -32,7 +32,7 @@ Ensure user supplied or any other untrusted data is not rendered as part of HTTP
 ```
 <%= output.searchTerm %>
 ```
-Notice the `=` symbol instead of `-`, which escapes the output. Note that this only prevents xss when the target for escaped output is in a html context. 
+Notice the `=` symbol instead of `-`, which escapes the output. Note that this only prevents xss when the target for escaped output is in a html context.
 
 **Fixes**
 
@@ -70,7 +70,7 @@ Enable output string encoding
 <td><%= output.products[i].tags %></td>
 ...
 ```
-Notice the `=` symbol instead of `-`, which escapes the output. Note that this only prevents xss when the target for escaped output is in a html context. 
+Notice the `=` symbol instead of `-`, which escapes the output. Note that this only prevents xss when the target for escaped output is in a html context.
 
 **Fixes**
 

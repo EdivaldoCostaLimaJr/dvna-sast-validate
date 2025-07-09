@@ -4,7 +4,7 @@ Este repositório contém uma Prova de Conceito (PoC) para validar a eficácia e
 
 [+] Objetivos
 
-    Avaliar ferramentas SAST 
+    Avaliar ferramentas SAST
     Verificar cobertura de regras e falsos positivos/negativos
     Simular cenários reais de vulnerabilidades (ex: XSS, SQLi, etc.)
     Integrar a ferramenta ao pipeline (GitHub Actions, GitLab CI, Jenkins, etc.)

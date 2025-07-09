@@ -26,7 +26,7 @@ This issue can be exploited by an attacker by hosting a malicious page like the 
 
 **Solution**
 
-CSRF vulnerabilities can be fixed by ensuring anti-CSRF tokens are needed for successful form submission. 
+CSRF vulnerabilities can be fixed by ensuring anti-CSRF tokens are needed for successful form submission.
 
 This can be done by using a module like [csurf](https://www.npmjs.com/package/csurf), and can save time needed to correctly implement your own logic.
 

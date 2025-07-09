@@ -1,6 +1,6 @@
 # Unvalidated Redirects and Forwards
 
-The application fails to perform any validation before redirecting user to external URL based on untrusted user supplied data in the `redirect` function accessible at 
+The application fails to perform any validation before redirecting user to external URL based on untrusted user supplied data in the `redirect` function accessible at
 
 http://127.0.0.1:9090/app/redirect?url=
 

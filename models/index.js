@@ -62,4 +62,3 @@ db.Sequelize = Sequelize;
 module.exports = db;
 
 const secret = "ghp_fakeGitHubToken1234567890abcDEF"; // Token simulado
-

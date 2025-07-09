@@ -14,7 +14,7 @@ This issue can be exploited by an attacker to reset any user's password by using
 http://127.0.0.1:9090/resetpw?login=<username>&token=<md5(username)>
 ```
 
-You can obtain the md5sum for `user` by running the following 
+You can obtain the md5sum for `user` by running the following
 
 ```bash
 echo -n 'user' | md5sum

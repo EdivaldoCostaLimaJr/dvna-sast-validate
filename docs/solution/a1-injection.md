@@ -2,7 +2,7 @@
 
 ## SQL Injection
 
-There is a SQL Injection in `User Search` feature at the following URL  
+There is a SQL Injection in `User Search` feature at the following URL
 
 http://127.0.0.1:9090/app/usersearch
 
@@ -15,7 +15,7 @@ An attacker can exploit this further and obtain potentially sensitive informatio
 **Vulnerable Code snippet**
 
 *core/appHandler.js*
-```         
+```
 ...
 var query = "SELECT name FROM Users WHERE login='" + req.body.login + "'";
 db.sequelize.query(query,{ model: db.User }).then(user => {

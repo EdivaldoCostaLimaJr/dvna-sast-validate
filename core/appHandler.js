@@ -145,7 +145,7 @@ module.exports.userEditSubmit = function (req, res) {
 	db.User.find({
 		where: {
 			'id': req.body.id
-		}		
+		}
 	}).then(user =>{
 		if(req.body.password.length>0){
 			if(req.body.password.length>0){
@@ -158,7 +158,7 @@ module.exports.userEditSubmit = function (req, res) {
 						userEmail: req.user.email,
 						userName: req.user.name,
 					})
-					return		
+					return
 				}
 			}else{
 				req.flash('warning', 'Invalid Password')

@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(fileUpload());
 
 // Enable for Reverse proxy support
-// app.set('trust proxy', 1) 
+// app.set('trust proxy', 1)
 
 // Intialize Session
 app.use(session({
