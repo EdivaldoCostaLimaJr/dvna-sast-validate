@@ -27,13 +27,17 @@ jobs:
         run: docker build -t my-app:latest .
 
       - name: Run Trivy scan and generate SARIF
-        run: trivy image --format sarif -o trivy-results.sarif --exit-code 1 --severity CRITICAL,HIGH my-app:latest #pipe
+        run: trivy image --format sarif -o trivy-results.sarif --exit-code 1 --severity CRITICAL,HIGH my-app:latest 
         continue-on-error: true
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: trivy-results.sarif
+      
+      - name: Fail if vulnerabilities found (Trivy)
+        run: |
+          trivy image --format table --exit-code 1 --severity CRITICAL,HIGH my-app:latest
 
       - name: 🔍 Show link to Code Scanning results
         run: |

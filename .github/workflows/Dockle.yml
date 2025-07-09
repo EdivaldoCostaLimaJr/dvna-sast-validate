@@ -28,7 +28,7 @@ jobs:
           image: 'built-image:scan'
           format: 'sarif'
           output: 'dockle-results.sarif'
-          exit-code: '1'  # pipe
+          exit-code: '1' 
           exit-level: 'warn'
 
       - name: Check Dockle SARIF file
@@ -40,6 +40,10 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: dockle-results.sarif
+      
+      - name: Fail if vulnerabilities found (Dockle)
+        run: |
+          docker run --rm goodwithtech/dockle -f table --exit-code 1 -i built-image:scan
 
       - name: 🔗 Show results link
         run: echo "🔍 https://github.com/${{ github.repository }}/security/code-scanning"
